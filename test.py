@@ -25,13 +25,13 @@ def rsaEncryption():
             e = r3
     d = -1
     count = 2
+    # (e*d) -1 mod n2 = 0
     while (d==-1):
         count += 1
         if ((count*e) -1 % n2) == 0:
             d = count
-    #extended eucliden 
-    # (e*d) -1 mod n2 = 0
-    #e*x+n2*y=1
+    
+
 
 
     print(d)

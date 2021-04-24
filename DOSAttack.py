@@ -2,6 +2,8 @@
 import random
 import math
 import sympy
+import socketserver
+import time
 #this is the server that we will attack
 class DOSServer():
     #port 80 is standard for connections 
@@ -15,7 +17,6 @@ class DOSServer():
             "User-Agent: Mozilla/5.0 Gecko/20091102 Chrome/3.5.5",
             "Accept-Language: en-us,en;q=0.5"
         ]
-
 
     def createSocket(self):
         try:
@@ -56,7 +57,7 @@ class DOSServer():
                     self._sockets.append(self.newSocket())
                 time.sleep(sleep/len(self._sockets))
     #add functions for encryption 
-    def rsaEncryption():
+    def rsaEncryption(message):
         #generate two prime numbers 
         p = -1
         q = -1
@@ -80,21 +81,18 @@ class DOSServer():
                 e = r3
         d = -1
         count = 2
+        # (e*d) -1 mod n2 = 0
         while (d==-1):
             count += 1
             if ((count*e) -1 % n2) == 0:
                 d = count
-        #extended eucliden 
-        # (e*d) -1 mod n2 = 0
-        #e*x+n2*y=1
+        inputValue = 0
+        for i in range(len(message)):
+            char = message[i]
+            value = ord(char) - 96 # from https://www.kite.com/python/answers/how-to-convert-letters-to-numbers-in-python
+            inputValue += value * 10^i
+        encryptedMessage = inputValue^e % n
 
-
-        print(d)
-        print(e)
-        print(n)
-        print(n2)
-        print(p)
-        print(q)
         #too slow
         # while (p == -1):
         #     r1 = random.randint(2,100)
