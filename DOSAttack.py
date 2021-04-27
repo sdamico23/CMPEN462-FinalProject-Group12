@@ -2,7 +2,7 @@
 import random
 import math
 import sympy
-import socketserver
+import socket
 import time
 #this is the server that we will attack
 class DOSServer():
@@ -57,7 +57,7 @@ class DOSServer():
                     self._sockets.append(self.newSocket())
                 time.sleep(sleep/len(self._sockets))
     #add functions for encryption 
-    def rsaEncryption(message):
+    def rsaEncryption(self,message):
         #generate two prime numbers 
         p = -1
         q = -1
@@ -86,6 +86,10 @@ class DOSServer():
             count += 1
             if ((count*e) -1 % n2) == 0:
                 d = count
+
+        #e*x+n2*y = 1
+        #d = e^-1 mod n2
+        d = pow(e,-1,n2)   
         inputValue = 0
         for i in range(len(message)):
             char = message[i]
