@@ -14,5 +14,5 @@ else:
 endTime = time.time()
 elapsedTimeSeconds = endTime-startTime
 elapsedTimeMilliSeconds = elapsedTimeSeconds*1000
-print(elapsedTimeSeconds)
-print(elapsedTimeMilliSeconds)
+print("Time in seconds: " + str(elapsedTimeSeconds))
+print("Time in milliseconds: " + str(elapsedTimeMilliSeconds))
