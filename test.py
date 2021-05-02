@@ -40,30 +40,6 @@ def rsaEncryption():
     print(n2)
     print(p)
     print(q)
-    
 
-
-        
-
-    #too slow
-    # while (p == -1):
-    #     r1 = random.randint(2,100)
-    #     for i in range(2,int(math.sqrt(r1) + 1)):
-    #         if (r1 % i == 0):
-    #             prime = False
-    #             break
-    #     if (prime == True):
-    #         p = r1
-    #         print(p)
-    # prime = True
-    # while (q == -1):
-    #     r2 = random.randint(2,100)
-    #     for i in range(2,int(math.sqrt(r2) + 1)):
-    #         if (r2 % i == 0):
-    #             prime = False
-    #             break
-    #     if (prime == True):
-    #         q = r2
-    #         print(q)
 
 rsaEncryption()

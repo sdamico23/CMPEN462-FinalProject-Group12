@@ -5,7 +5,7 @@ import time
 
 #get start time
 startTime = time.time()
-ourPage = urllib.request.urlopen('https://google.com')
+ourPage = urllib.request.urlopen('http://192.168.31.237/')
 #success 
 if (ourPage.getcode() == 200):
     print("Connected to the page successfully")
